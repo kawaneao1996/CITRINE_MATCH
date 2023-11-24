@@ -1,15 +1,31 @@
 import './App.css'
 
 function App() {
-  // 選択肢を表す型
-  type Choices = { 1: string, 2: string, 3: string, 4: string };
-  // 問題文、選択肢、解答を表す型
-  type QuizItem = { question: string, choices: Choices, answer?: number };
-  const quizItems: QuizItem[] = [
-    { question: 'あなたが好きな季節は？', choices: { 1: '春', 2: '夏', 3: '秋', 4: '冬' }, },
-    { question: 'あなたが好きな場所は？', choices: { 1: '山', 2: '海', 3: '川', 4: '野原' }, },
-    { question: 'あなたが好きな食べ物は？', choices: { 1: '動物の肉', 2: '魚', 3: '野菜・穀物', 4: '乳製品' }, },
-  ]
+  type QuizItem = {
+    question: string,
+    choices: Choice[],
+    answer?: Choice,
+  };
+  type EvaluationCriteria = {
+    // スコアは -1.0 ~ 1.0 で付ける
+    // 自己愛・自己嫌悪（プラスが自己愛）
+    selfEsteemLevel: null | number,
+    // 外交的・内向的の軸（プラスが外交的）
+    extroversionLevel: null | number,
+    // 発信と受信（プラスが発信）
+    energyEmissionLevel: null | number,
+  };
+  type Choice = {
+    // 選択肢の文
+    sentence: string,
+    // 評価項目の値
+    evaluationScore: EvaluationCriteria,
+  };
+  const quizItems: QuizItem[] = [];
+
+  const onSubmit = () => {
+    console.log(quizItems);
+  };
 
   return (
     <>
@@ -23,7 +39,7 @@ function App() {
           </section>
         ))
       }
-      <button type="button" onClick={() => { console.log(quizItems[0].answer) }}>診断！</button>
+      <button type="button" onClick={() => onSubmit()}>診断！</button>
     </>
   );
 }
