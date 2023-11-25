@@ -90,7 +90,6 @@ describe('calculateScoreの正常系(全問解答済)のテスト', () => {
 
     // 正常系で期待される結果
     const expected: EvaluationCriteria = {
-        // ここに期待される結果を追加します
         selfEsteemLevel: -0.1,
         extroversionLevel: 0.5,
         energyEmissionLevel: 0.6
@@ -138,7 +137,6 @@ const quizItemsStillNotAnswered: QuizItem[] = [
                     energyEmissionLevel: 0.3
                 }
             },
-            // 必要に応じて他の選択肢を追加
         ],
         answer: null
     },
@@ -153,7 +151,6 @@ const quizItemsStillNotAnswered: QuizItem[] = [
                     energyEmissionLevel: 0.6
                 }
             },
-            // 必要に応じて他の選択肢を追加
         ],
         answer: {
             sentence: "Choice 1",
@@ -175,7 +172,6 @@ const quizItemsStillNotAnswered: QuizItem[] = [
                     energyEmissionLevel: 0.9
                 }
             },
-            // 必要に応じて他の選択肢を追加
         ],
         answer: null
     }
