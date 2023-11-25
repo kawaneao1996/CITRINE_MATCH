@@ -2,8 +2,8 @@ import { describe, expect, test } from 'vitest'
 
 test("何もしないテスト", () => { });
 
-import { calculateScore } from './utils/CalculateScore';
-import { EvaluationCriteria, QuizItem } from './quiz/Types';
+import { calculateScore } from './CalculateScore';
+import { EvaluationCriteria, QuizItem } from '../quiz/Types';
 
 // 全て解答済のデータ
 const quizItemsAllAnswered: QuizItem[] = [

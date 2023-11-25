@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1700884926669" clover="3.2.0">
-  <project timestamp="1700884926669" name="All files">
+<coverage generated="1700885169817" clover="3.2.0">
+  <project timestamp="1700885169817" name="All files">
     <metrics statements="43" coveredstatements="43" conditionals="10" coveredconditionals="10" methods="1" coveredmethods="1" elements="54" coveredelements="54" complexity="0" loc="43" ncloc="43" packages="1" files="1" classes="1"/>
     <file name="CalculateScore.ts" path="/Users/matsuoyoshihiro/Desktop/PSYCHO_TEST_VITE/PSYCHO_TEST/src/utils/CalculateScore.ts">
       <metrics statements="43" coveredstatements="43" conditionals="10" coveredconditionals="10" methods="1" coveredmethods="1"/>
