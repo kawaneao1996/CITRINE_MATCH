@@ -6,7 +6,12 @@
 type QuizItem = {
     question: string,
     choices: Choice[],
-    answer?: Choice,
+};
+type Choice = {
+    // 選択肢の文
+    sentence:string,
+    // 評価項目の値
+    evaluationScore:EvaluationCriteria,
 };
 type EvaluationCriteria = {
     // スコアは -1.0 ~ 1.0 で付ける
@@ -17,15 +22,12 @@ type EvaluationCriteria = {
     // 発信と受信（プラスが発信）
     energyEmissionLevel:null|number,
 };
-type Choice = {
-    // 選択肢の文
-    sentence:string,
-    // 評価項目の値
-    evaluationScore:EvaluationCriteria,
-};
+// フォームから集計されるデータ。answerはJSON形式で、デコードするとEvaluationCriteria型になる。
+type Answers = { [index: string]: { answer: string } };
+
 ```
 
-`userScore:EvaluationCriteria` となる
+`const answersArray: EvaluationCriteria[]`が`calculateScore`の引数になる。
 
 ## 評価の計算方法
 
