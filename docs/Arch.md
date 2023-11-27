@@ -43,3 +43,44 @@ type Choice = {
 4. 内部変数の各プロパティ名と平均値がセットになったオブジェクトを返す
 
 なので引数は`quizItems`, 戻り値は`EvaluationCriteria`型のオブジェクト。
+
+## フォームの設計
+
+```mermaid
+graph TD
+  A[Appコンポーネント] -->|ユーザーの選択を保持| B[診断ボタン]
+  C[QuizCardコンポーネント] -->|選択肢がクリックされたら通知| A
+  B -->|クリックされたら集計| D[結果表示]
+```
+
+### 2023/11/26のメモ
+
+Data.tsのクイズデータを状態管理する。
+またボタンを押して選択した際の挙動はuseFormを使って実現する？
+
+calculateScoreの挙動で、未回答のものがあれば
+その番号のところまでスクロールさせる挙動にする
+
+```typescript
+import React from 'react';
+
+function ScrollButton() {
+  const handleClick = () => {
+    const element = document.getElementById('target');
+    if (element) {
+      window.scrollTo({
+        top: element.offsetTop, // スクロール先のy座標
+        behavior: 'smooth' // スクロールの動きを滑らかにする
+      });
+    }
+  };
+
+  return (
+    <button onClick={handleClick}>
+      Scroll to position
+    </button>
+  );
+}
+
+export default ScrollButton;
+```
