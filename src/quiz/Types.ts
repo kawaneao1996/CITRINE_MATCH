@@ -1,8 +1,6 @@
 export type QuizItem = {
     question: string,
     choices: Choice[],
-    // 解答前はnullが入っている
-    answer: Choice | null,
 };
 export type EvaluationCriteria = {
     // スコアは -1.0 ~ 1.0 で付ける

@@ -1,4 +1,4 @@
-import { EvaluationCriteria, QuizItem } from "../quiz/Types";
+import { EvaluationCriteria } from "../quiz/Types";
 
 /**
 * クイズアイテムの配列からスコアを計算します。
@@ -9,7 +9,7 @@ import { EvaluationCriteria, QuizItem } from "../quiz/Types";
 * @param quizItems スコアを計算するためのクイズアイテムの配列
 * @returns 計算されたスコアのオブジェクト。ただし、任意のクイズアイテムのanswerがnullの場合はfalseを返します。
 */
-export function calculateScore(quizItems: QuizItem[]): EvaluationCriteria | false {
+export function calculateScore(answers: (EvaluationCriteria | null)[]): EvaluationCriteria | false {
     const notNullScores: Record<keyof EvaluationCriteria, number[]> = {
         selfEsteemLevel: [],
         extroversionLevel: [],
@@ -20,14 +20,14 @@ export function calculateScore(quizItems: QuizItem[]): EvaluationCriteria | fals
         extroversionLevel: null,
         energyEmissionLevel: null,
     };
-    for (const item of quizItems) {
-        if (item.answer === null) {
+    for (const answer of answers) {
+        if (answer === null) {
             return false;
         } else {
-            Object.keys(item.answer.evaluationScore).forEach(key => {
-                const score = item.answer!.evaluationScore[key as keyof EvaluationCriteria];
-                if (score !== null) {
-                    notNullScores[key as keyof EvaluationCriteria].push(score);
+            Object.keys(answer).map((key) => {
+                const typeKey = key as keyof EvaluationCriteria;
+                if (answer[typeKey] !== null) {
+                    notNullScores[typeKey].push(answer[typeKey]!);
                 }
             });
             for (const key in notNullScores) {
