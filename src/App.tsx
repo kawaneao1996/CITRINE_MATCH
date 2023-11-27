@@ -4,6 +4,7 @@ import QuizCard from './elements/QuizCard';
 import { quizItems_ver0 } from './quiz/Data';
 import { calculateScore } from './utils/CalculateScore';
 import { EvaluationCriteria } from './quiz/Types';
+import { NullCheckArray } from './utils/NullCheckArray';
 
 export type Answers = { [index: number]: { answer: string } };
 function App() {
@@ -14,7 +15,13 @@ function App() {
       const numKey = Number(key);
       answersArray.push(JSON.parse(answers[numKey].answer))
     })
-    console.log(answersArray);
+    const calcResult: EvaluationCriteria | false = calculateScore(answersArray);
+    if (calcResult) {
+      console.log(calcResult);
+    } else {
+      console.log("未回答があります");
+      console.log(NullCheckArray(answersArray))
+    }
   };
   return (
     <>
