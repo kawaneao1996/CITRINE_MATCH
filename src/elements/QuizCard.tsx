@@ -21,7 +21,8 @@ function QuizCard(props: Props) {
                             type="radio"
                             id={`${props.index}.choices.${index}`}
                             value={JSON.stringify(choice.evaluationScore)}
-                            {...props.register(`${props.index}.answer`)}
+                            // TODO registerの引数の型をneverからstringに変更する
+                            {...props.register(`${props.index}.answer` as never)}
                         />
                         <label
                             htmlFor={`${props.index}.choices.${index}`}
