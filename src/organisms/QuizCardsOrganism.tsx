@@ -13,15 +13,20 @@ function QuizCardsOrganism() {
     const submitButtonRef = useRef<HTMLButtonElement>(null);
     const watchAll = watch();
     useEffect(() => {
-        // watchAllの初期値が{}なので、Object.keys(watchAll).length !== 0を追加
-        if (Object.keys(watchAll).length !== 0) {
-            // watchAllのすべての値がnullでないかをチェックする
-            // すべての値がnullでなければtrueを返す
-            const isAllNotNull = Object.values(watchAll).every((choice) => choice.answer !== null);
-            if (isAllNotNull) {
-                // 診断ボタンまでスクロールする
-                submitButtonRef.current!.scrollIntoView({ behavior: 'smooth' });
+        try {
+            // watchAllの初期値が{}なので、Object.keys(watchAll).length !== 0を追加
+            if (Object.keys(watchAll).length !== 0) {
+                // watchAllのnullの値をチェックする
+                // nullの値があればそのvalueのkeyを返す
+                const NullCheckArrayIndex = Object.values(watchAll).findIndex((value) => value.answer === null);
+                if (NullCheckArrayIndex !== -1) {
+                    refs[NullCheckArrayIndex].current!.scrollIntoView({ behavior: 'smooth' }); // 未回答の選択肢までスクロール
+                } else {
+                    submitButtonRef.current!.scrollIntoView({ behavior: 'smooth' }); // 診断ボタンまでスクロール
+                }
             }
+        } catch (error) {
+            console.log(error);
         }
     }, [watchAll]);
 

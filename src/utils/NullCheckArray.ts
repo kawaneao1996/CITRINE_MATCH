@@ -5,7 +5,7 @@ import { EvaluationCriteria } from "../quiz/Types";
  * @param answersArray CalculateScoreに渡す配列
  * @returns nullの最小index。nullがなければ0を返す。
  */
-export function NullCheckArray(answersArray: (EvaluationCriteria | null)[]): number {
+export function NullCheckArray(answersArray: (EvaluationCriteria | null)[] | {answer:string;}[]): number {
     const nullIndex = answersArray.findIndex(answer => answer === null);
     // nullIndexが-1、つまりnullがなければ0を返す。
     // これはCalculateScoreがfalseの時だけこのメソッドを呼び出すのでそのようにする。
