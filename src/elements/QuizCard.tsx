@@ -1,6 +1,5 @@
 import { UseFormRegister } from "react-hook-form";
-import { QuizItem } from "../quiz/Types";
-import { Answers } from "../App";
+import { Answers, QuizItem } from "../quiz/Types";
 
 type Props = {
     quizItem: QuizItem,
