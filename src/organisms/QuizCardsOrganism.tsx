@@ -4,9 +4,12 @@ import { quizItems_ver0 } from "../quiz/Data";
 import { Answers, EvaluationCriteria } from "../quiz/Types";
 import { calculateScore } from "../utils/CalculateScore";
 import { NullCheckArray } from "../utils/NullCheckArray";
+import { useRef } from "react";
 
 function QuizCardsOrganism() {
     const { register, handleSubmit } = useForm<Answers>();
+    const refs = quizItems_ver0.map(() => useRef<HTMLDivElement>(null)); // 各選択肢に対する参照を作成
+
     const onSubmit: SubmitHandler<Answers> = (answers: Answers) => {
         const answersArray: (EvaluationCriteria | null)[] = [];
         Object.keys(answers).map((key) => {
@@ -19,18 +22,36 @@ function QuizCardsOrganism() {
         } else {
             console.log("未回答があります");
             console.log(NullCheckArray(answersArray))
+            refs[NullCheckArray(answersArray)].current!.scrollIntoView({ behavior: 'smooth' }); // 未回答の選択肢までスクロール
         }
     };
     return (
         <>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                {
-                    quizItems_ver0.map((quizItem, index) => (
-                        <QuizCard quizItem={quizItem} index={index} register={register} />
-                    ))
-                }
-                <button type="submit">診断！</button>
-            </form>
+            <div className="w-[80%] h-auto mx-auto p-5 rounded-2xl  bg-white bg-opacity-20">
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    {
+                        quizItems_ver0.map((quizItem, index) => (
+                            <div ref={refs[index]} key={index}> {/* 各選択肢に参照を設定 */}
+                                <QuizCard quizItem={quizItem} index={index} register={register} />
+                            </div>
+                        ))
+                    }
+                    <button type="submit"
+                        className="
+                        mx-auto
+                        block
+                        p-2
+                        text-white
+                        hover:text-primary-600
+                        hover:bg-white
+                        border-2
+                        rounded-lg
+                    "
+                    >
+                        診断！
+                    </button>
+                </form>
+            </div>
         </>
     );
 }
