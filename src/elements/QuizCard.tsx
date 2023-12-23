@@ -12,6 +12,11 @@ type Props = {
 function QuizCard(props: Props) {
     // ラジオボタンが入力されたかどうかを表す変数
     const [isInput, setIsInput] = useState(false);
+    const {onChange, ...rest} = props.register(`${props.index}.answer` as never);
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setIsInput(true);
+        onChange(e);
+    };
 
     return (
         <div className="bg-opaity-10  border-2 rounded-xl m-5 p-5">
@@ -31,9 +36,10 @@ function QuizCard(props: Props) {
                                 // TODO registerの引数の型をneverからstringに変更する
                                 // 8行目のregisterの型をAnswersからanyにするとエラーが消える
                                 // TODO バリデーションを追加する
-                                {...props.register(`${props.index}.answer` as never)}
+                                // {...props.register(`${props.index}.answer` as never)}
+                                onChange={handleChange}
+                                {...rest}
                                 className="hidden peer"
-                                onChange={() => setIsInput(true)} // ラジオボタンが選択されたらisInputをtrueに設定
                             />
                             <label
                                 htmlFor={`${props.index}.choices.${index}`}
