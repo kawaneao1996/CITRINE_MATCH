@@ -4,11 +4,26 @@ import { quizItems_ver0 } from "../quiz/Data";
 import { Answers, EvaluationCriteria } from "../quiz/Types";
 import { calculateScore } from "../utils/CalculateScore";
 import { NullCheckArray } from "../utils/NullCheckArray";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 function QuizCardsOrganism() {
-    const { register, handleSubmit, formState:{isSubmitted} } = useForm<Answers>();
+    const { register, handleSubmit, formState: { isSubmitted }, watch } = useForm<Answers>();
     const refs = quizItems_ver0.map(() => useRef<HTMLDivElement>(null)); // 各選択肢に対する参照を作成
+    // 診断ボタンのrefを作成
+    const submitButtonRef = useRef<HTMLButtonElement>(null);
+    const watchAll = watch();
+    useEffect(() => {
+        // watchAllの初期値が{}なので、Object.keys(watchAll).length !== 0を追加
+        if (Object.keys(watchAll).length !== 0) {
+            // watchAllのすべての値がnullでないかをチェックする
+            // すべての値がnullでなければtrueを返す
+            const isAllNotNull = Object.values(watchAll).every((choice) => choice.answer !== null);
+            if (isAllNotNull) {
+                // 診断ボタンまでスクロールする
+                submitButtonRef.current!.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    }, [watchAll]);
 
     const onSubmit: SubmitHandler<Answers> = (answers: Answers) => {
         const answersArray: (EvaluationCriteria | null)[] = [];
@@ -18,8 +33,10 @@ function QuizCardsOrganism() {
         })
         const calcResult: EvaluationCriteria | false = calculateScore(answersArray);
         if (calcResult) {
+            // TODO console.logを削除する
             console.log(calcResult);
         } else {
+            // TODO console.logを削除する
             console.log("未回答があります");
             console.log(NullCheckArray(answersArray))
             refs[NullCheckArray(answersArray)].current!.scrollIntoView({ behavior: 'smooth' }); // 未回答の選択肢までスクロール
@@ -37,6 +54,7 @@ function QuizCardsOrganism() {
                         ))
                     }
                     <button type="submit"
+                        ref={submitButtonRef}
                         className="
                         mx-auto
                         block
