@@ -1,18 +1,25 @@
 import { UseFormRegister } from "react-hook-form";
 import { Answers, QuizItem } from "../quiz/Types";
+import { useState } from "react";
 
 type Props = {
     quizItem: QuizItem,
     index: number,
     register: UseFormRegister<Answers>,
+    isSubmitted: boolean,
 };
 
 function QuizCard(props: Props) {
+    // ラジオボタンが入力されたかどうかを表す変数
+    const [isInput, setIsInput] = useState(false);
+
     return (
         <div className="bg-opaity-10  border-2 rounded-xl m-5 p-5">
             <section className="bg-opacity-0 text-white">
                 <h2>{props.index + 1}問目</h2>
                 <p className="font-bold">{props.quizItem.question}</p>
+                {/* 提出済みでかつ未入力ならメッセージを表示する */}
+                {(props.isSubmitted && !isInput) && <p className="text-xl font-bold text-secondary-400 animate-pulse">選択肢を選択してください</p>}
                 <fieldset className="border-2 rounded-lg m-2 p-4 ">
                     <legend className="px-2">選択肢</legend>
                     {props.quizItem.choices.map((choice, index) => (
@@ -26,6 +33,7 @@ function QuizCard(props: Props) {
                                 // TODO バリデーションを追加する
                                 {...props.register(`${props.index}.answer` as never)}
                                 className="hidden peer"
+                                onChange={() => setIsInput(true)} // ラジオボタンが選択されたらisInputをtrueに設定
                             />
                             <label
                                 htmlFor={`${props.index}.choices.${index}`}

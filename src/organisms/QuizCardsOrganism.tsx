@@ -7,7 +7,7 @@ import { NullCheckArray } from "../utils/NullCheckArray";
 import { useRef } from "react";
 
 function QuizCardsOrganism() {
-    const { register, handleSubmit } = useForm<Answers>();
+    const { register, handleSubmit, formState:{isSubmitted} } = useForm<Answers>();
     const refs = quizItems_ver0.map(() => useRef<HTMLDivElement>(null)); // 各選択肢に対する参照を作成
 
     const onSubmit: SubmitHandler<Answers> = (answers: Answers) => {
@@ -32,7 +32,7 @@ function QuizCardsOrganism() {
                     {
                         quizItems_ver0.map((quizItem, index) => (
                             <div ref={refs[index]} key={index}> {/* 各選択肢に参照を設定 */}
-                                <QuizCard quizItem={quizItem} index={index} register={register} />
+                                <QuizCard quizItem={quizItem} index={index} register={register} isSubmitted={isSubmitted} />
                             </div>
                         ))
                     }
