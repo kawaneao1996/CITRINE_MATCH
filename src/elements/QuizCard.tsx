@@ -22,6 +22,7 @@ function QuizCard(props: Props) {
                             id={`${props.index}.choices.${index}`}
                             value={JSON.stringify(choice.evaluationScore)}
                             // TODO registerの引数の型をneverからstringに変更する
+                            // 8行目のregisterの型をAnswersからanyにするとエラーが消える
                             {...props.register(`${props.index}.answer` as never)}
                         />
                         <label
