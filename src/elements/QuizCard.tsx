@@ -16,21 +16,35 @@ function QuizCard(props: Props) {
                 <fieldset className="border-2 rounded-lg m-2 p-4 ">
                     <legend className="px-2">選択肢</legend>
                     {props.quizItem.choices.map((choice, index) => (
+                        <div>
+                            <input
+                                type="radio"
+                                id={`${props.index}.choices.${index}`}
+                                value={JSON.stringify(choice.evaluationScore)}
+                                // TODO registerの引数の型をneverからstringに変更する
+                                // 8行目のregisterの型をAnswersからanyにするとエラーが消える
+                                // TODO バリデーションを追加する
+                                {...props.register(`${props.index}.answer` as never)}
+                                className="hidden peer"
+                            />
                             <label
                                 htmlFor={`${props.index}.choices.${index}`}
-                                className="block rounded-md bg-opacity-0 hover:bg-opacity-50 hover:bg-white hover:text-primary-600  py-2"
+                                className="
+                                block 
+                                rounded-md 
+                                bg-opacity-0 
+                                hover:bg-opacity-50 
+                                hover:bg-white 
+                                hover:text-primary-600  
+                                py-2
+                                peer-checked:bg-secondary-300
+                                peer-checked:text-primary-600
+                                peer-checked:motion-safe:animate-bounce
+                                "
                             >
-                                <input
-                                    type="radio"
-                                    id={`${props.index}.choices.${index}`}
-                                    value={JSON.stringify(choice.evaluationScore)}
-                                    // TODO registerの引数の型をneverからstringに変更する
-                                    // 8行目のregisterの型をAnswersからanyにするとエラーが消える
-                                    // TODO バリデーションを追加する
-                                    {...props.register(`${props.index}.answer` as never)}
-                                />
                                 {choice.sentence}
                             </label>
+                        </div>
                     ))}
                 </fieldset>
             </section>
