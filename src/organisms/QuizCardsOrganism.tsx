@@ -43,7 +43,7 @@ function QuizCardsOrganism() {
                         p-2
                         text-white
                         hover:text-primary-600
-                        hover:bg-secondary-300
+                        hover:bg-white
                         border-2
                         rounded-lg
                     "
