@@ -9,7 +9,7 @@ function QuestionaireTemplate() {
             h-full
             p-10
             bg-gradient-to-r 
-            from-primary-500
+            from-primary-700
             via-primary-600
             to-primary-700
             background-animate
