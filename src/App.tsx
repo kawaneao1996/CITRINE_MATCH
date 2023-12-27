@@ -1,10 +1,14 @@
+import { Route, Routes } from 'react-router-dom';
 import './App.css'
 import QuestionaireTemplate from './templates/QuetionaireTemplate';
 
 function App() {
   return (
     <>
-      <QuestionaireTemplate />
+      <Routes>
+        <Route path='/' element={<>Home</>} />
+        <Route path='Questionaire' element={<QuestionaireTemplate />} />
+      </Routes>
     </>
   );
 }
