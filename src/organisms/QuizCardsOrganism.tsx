@@ -53,8 +53,8 @@ function QuizCardsOrganism() {
                 <form onSubmit={handleSubmit(onSubmit)}>
                     {
                         quizItems_ver0.map((quizItem, index) => (
-                            <div ref={refs[index]} key={index}> {/* 各選択肢に参照を設定 */}
-                                <QuizCard quizItem={quizItem} index={index} register={register} isSubmitted={isSubmitted} />
+                            <div ref={refs[index]} key={`quizItem.div.${index}`}> {/* 各選択肢に参照を設定 */}
+                                <QuizCard key={`quizItem.QuizCard.${index}`}  quizItem={quizItem} index={index} register={register} isSubmitted={isSubmitted} />
                             </div>
                         ))
                     }

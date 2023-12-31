@@ -3,6 +3,7 @@ import { Answers, QuizItem } from "../quiz/Types";
 import { useState } from "react";
 
 type Props = {
+    key: string,
     quizItem: QuizItem,
     index: number,
     register: UseFormRegister<Answers>,
@@ -12,7 +13,7 @@ type Props = {
 function QuizCard(props: Props) {
     // ラジオボタンが入力されたかどうかを表す変数
     const [isInput, setIsInput] = useState(false);
-    const {onChange, ...rest} = props.register(`${props.index}.answer` as never);
+    const { onChange, ...rest } = props.register(`${props.index}.answer` as never);
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setIsInput(true);
         onChange(e);
@@ -28,7 +29,7 @@ function QuizCard(props: Props) {
                 <fieldset className="border-2 rounded-lg m-2 p-4 ">
                     <legend className="px-2">選択肢</legend>
                     {props.quizItem.choices.map((choice, index) => (
-                        <div>
+                        <div key={`${props.index}.choices.${index}`} >
                             <input
                                 type="radio"
                                 id={`${props.index}.choices.${index}`}
