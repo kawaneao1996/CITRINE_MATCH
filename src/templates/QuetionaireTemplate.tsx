@@ -1,9 +1,11 @@
+import Header from "../organisms/Header";
 import QuizCardsOrganism from "../organisms/QuizCardsOrganism";
 
 function QuestionaireTemplate() {
     // TODO パンくずリストを追加する
     return (
         <>
+            <Header />
             <div className="
             w-full
             h-full

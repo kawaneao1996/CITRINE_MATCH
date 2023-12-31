@@ -4,11 +4,12 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import QuestionaireTemplate from './templates/QuetionaireTemplate';
+import HomeTemplate from './templates/HomeTemplate';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <div>Home!</div>,
+    element: <HomeTemplate />,
   },
   {
     path: "/questionaire",
