@@ -23,9 +23,9 @@ function QuizCard(props: Props) {
         <div className="bg-opaity-10  border-2 rounded-xl m-5 p-5">
             <section className="bg-opacity-0 text-white">
                 <h2>{props.index + 1}問目</h2>
-                <p className="font-bold">{props.quizItem.question}</p>
+                <p>{props.quizItem.question}</p>
                 {/* 提出済みでかつ未入力ならメッセージを表示する */}
-                {(props.isSubmitted && !isInput) && <p className="text-xl font-bold text-secondary-400 animate-pulse">選択肢を選択してください</p>}
+                {(props.isSubmitted && !isInput) && <p className="text-xl  text-secondary-400 animate-pulse">選択肢を選択してください</p>}
                 <fieldset className="border-2 rounded-lg m-2 p-4 ">
                     <legend className="px-2">選択肢</legend>
                     {props.quizItem.choices.map((choice, index) => (
@@ -55,7 +55,6 @@ function QuizCard(props: Props) {
                                 peer-checked:bg-secondary-300
                                 peer-checked:text-primary-600
                                 peer-checked:motion-safe:animate-bounce
-                                font-bold
                                 "
                             >
                                 {choice.sentence}
