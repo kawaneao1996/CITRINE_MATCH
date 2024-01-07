@@ -118,3 +118,12 @@ export default ScrollButton;
 基礎的な心理テストと、追加の心理テストを課金アイテムにする。
 相手に強制はやりすぎなので、相手にプレゼントとかは？
 データベースを作るときの参考にする。
+
+あとデプロイについては、
+```sh
+yarn build
+yarn deploy
+```
+これで勝手にデプロイされる。
+でできる。gh-pagesをyarn add してpackage.jsonを記述したら
+あとはgit hub側の設定を少しいじればできたと思う。
