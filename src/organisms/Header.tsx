@@ -28,7 +28,7 @@ export default function Header() {
                     </div>
                     <div className="flex flex-row justify-end items-center flex-grow">
                         <HeaderContent path="/" label="Home" />
-                        <HeaderContent path="/questionaire" label="Questionaire" />
+                        <HeaderContent path="/questionnaire" label="Questionnaire" />
                     </div>
                 </div>
             </header>
