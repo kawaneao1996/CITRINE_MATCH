@@ -1,31 +1,16 @@
 import './App.css'
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
-import HomeTemplate from './templates/HomeTemplate';
-import QuestionnaireTemplate from './templates/QuestionnaireTemplate';
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <HomeTemplate />,
-  },
-  // TODO error pageを作成する
-  {
-    path: "/questionnaire",
-    element: <QuestionnaireTemplate />,
-  },
-  {
-    path: "/chat",
-    element: <div>chatをこれから作るよ！</div>,
-  },
-]);
-
+import { Outlet } from "react-router-dom";
+import Header from './organisms/Header';
+import { BACKGROUND_THEME } from './utils/theme';
 function App() {
   return (
     <>
-      <RouterProvider router={router} />
+      <div className="flex flex-col">
+        <Header />
+        <div className={`${BACKGROUND_THEME} flex flex-1 justify-center items-center`}>
+          <Outlet />
+        </div>
+      </div>
     </>
   );
 }
