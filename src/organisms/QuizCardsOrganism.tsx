@@ -5,6 +5,7 @@ import { Answers, EvaluationCriteria } from "../quiz/Types";
 import { calculateScore } from "../utils/CalculateScore";
 import { NullCheckArray } from "../utils/NullCheckArray";
 import { useEffect, useRef } from "react";
+import Button from "../elements/Button";
 
 function QuizCardsOrganism() {
     const { register, handleSubmit, formState: { isSubmitted }, watch } = useForm<Answers>();
@@ -54,25 +55,15 @@ function QuizCardsOrganism() {
                     {
                         quizItems_ver0.map((quizItem, index) => (
                             <div ref={refs[index]} key={`quizItem.div.${index}`}> {/* 各選択肢に参照を設定 */}
-                                <QuizCard key={`quizItem.QuizCard.${index}`}  quizItem={quizItem} index={index} register={register} isSubmitted={isSubmitted} />
+                                <QuizCard key={`quizItem.QuizCard.${index}`} quizItem={quizItem} index={index} register={register} isSubmitted={isSubmitted} />
                             </div>
                         ))
                     }
-                    <button type="submit"
+                    <Button
+                        type="submit"
                         ref={submitButtonRef}
-                        className="
-                        mx-auto
-                        block
-                        p-2
-                        text-white
-                        hover:text-primary-600
-                        hover:bg-white
-                        border-2
-                        rounded-lg
-                    "
-                    >
-                        診断！
-                    </button>
+                        label="診断！"
+                    />
                 </form>
             </div>
         </>

@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { BUTTON_THEME, BUTTON_THEME_ACTIVE } from "../utils/theme";
+import { BUTTON_THEME, BUTTON_THEME_ACTIVE, GRADATION_ANIMATE_THEME } from "../utils/theme";
 
 export default function Header() {
     const generateActiveStyle = ({ isActive }: { isActive: boolean }) => {
@@ -17,10 +17,10 @@ export default function Header() {
     return (
         <>
             {/* 各ページへのリンクをヘッダーに表示する */}
-            <header className="bg-secondary-400">
-                <div className="flex flex-row justify-between items-center p-5">
+            <header className={GRADATION_ANIMATE_THEME}>
+                <div className="flex flex-row justify-between items-center">
                     <div className="flex flex-row items-center center">
-                        <div className="text-3xl font-bold text-white">Quiz App</div>
+                        <div className="text-3xl font-bold text-white p-2">Quiz App</div>
                     </div>
                     <div className="flex flex-row justify-end items-center flex-grow">
                         <HeaderContent path="/" label="Home" />
