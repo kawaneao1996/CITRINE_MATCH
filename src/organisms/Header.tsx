@@ -1,13 +1,9 @@
 import { NavLink } from "react-router-dom";
+import { BUTTON_THEME, BUTTON_THEME_ACTIVE } from "../utils/theme";
 
 export default function Header() {
-    const HOVER_STYLE = "hover:bg-white hover:text-secondary-400";
-    const INACTIVE_STYLE = "border-white border-2 rounded-sm  text-white";
-    const ACTIVE_STYLE = "bg-white border-white border-2 rounded-sm  text-secondary-400";
-    const BASE_STYLE = "mx-1 px-1 text-bold";
     const generateActiveStyle = ({ isActive }: { isActive: boolean }) => {
-        let style = isActive ? ACTIVE_STYLE : INACTIVE_STYLE;
-        style = style + " " + BASE_STYLE + " " + HOVER_STYLE;
+        let style = isActive ? BUTTON_THEME_ACTIVE : BUTTON_THEME;
         return style;
     };
     const HeaderContent = ({ path, label }: { path: string, label: string }) => {
