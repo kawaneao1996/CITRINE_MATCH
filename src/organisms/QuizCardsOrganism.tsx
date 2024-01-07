@@ -41,7 +41,10 @@ function QuizCardsOrganism() {
         if (calcResult) {
             // TODO console.logを削除する
             console.log(calcResult);
-            Object.keys(calcResult).map((key) => {alert(`${key}: ${calcResult[key]}`)});
+            // Object.keys(calcResult).map((key) => {alert(`${key}: ${calcResult[key]}`)});
+            for (const [key, value] of Object.entries(calcResult)) {
+                alert(`${key}: ${value}`);
+            }
         } else {
             // TODO console.logを削除する
             console.log("未回答があります");
