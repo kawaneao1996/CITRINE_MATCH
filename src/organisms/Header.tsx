@@ -1,4 +1,5 @@
 import { BUTTON_THEME, BUTTON_THEME_ACTIVE, GRADATION_ANIMATE_THEME } from "../utils/theme"; import NavButton from "../elements/NavButton";
+import { ROUTER_BASE_URL, ROUTER_CHAT_URL, ROUTER_QUIZ_URL } from "../utils/URL";
 
 export default function Header() {
     const generateActiveStyle = ({ isActive }: { isActive: boolean }) => {
@@ -15,9 +16,8 @@ export default function Header() {
                         <div className="text-3xl font-bold text-white p-2">Quiz App</div>
                     </div>
                     <div className="flex flex-row justify-end items-center flex-grow">
-                        <NavButton path="/" className={({isActive}) => generateActiveStyle({isActive})} label="Home" />
-                        {/* <NavButton path="/questionnaire" className={({isActive}) => generateActiveStyle({isActive})} label="Questionnaire" /> */}
-                        <NavButton path="/chat" className={({isActive}) => generateActiveStyle({isActive})} label="chat" />
+                        <NavButton path={ROUTER_BASE_URL} className={generateActiveStyle} label="Home" />
+                        <NavButton path={ROUTER_CHAT_URL} className={generateActiveStyle} label="chat" />
                     </div>
                 </div>
             </header>
