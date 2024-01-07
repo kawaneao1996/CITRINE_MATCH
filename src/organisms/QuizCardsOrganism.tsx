@@ -41,9 +41,11 @@ function QuizCardsOrganism() {
         if (calcResult) {
             // TODO console.logを削除する
             console.log(calcResult);
+            Object.keys(calcResult).map((key) => {alert(`${key}: ${calcResult[key]}`)});
         } else {
             // TODO console.logを削除する
             console.log("未回答があります");
+            alert("未回答があります");
             console.log(NullCheckArray(answersArray))
             refs[NullCheckArray(answersArray)].current!.scrollIntoView({ behavior: 'smooth' }); // 未回答の選択肢までスクロール
         }
@@ -59,11 +61,13 @@ function QuizCardsOrganism() {
                             </div>
                         ))
                     }
-                    <Button
-                        type="submit"
-                        ref={submitButtonRef}
-                        label="診断！"
-                    />
+                    <div className="flex flex-col justify-center items-center">
+                        <Button
+                            type="submit"
+                            ref={submitButtonRef}
+                            label="診断！"
+                        />
+                    </div>
                 </form>
             </div>
         </>

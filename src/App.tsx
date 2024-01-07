@@ -16,6 +16,10 @@ const router = createBrowserRouter([
     path: "/questionnaire",
     element: <QuestionnaireTemplate />,
   },
+  {
+    path: "/chat",
+    element: <div>chatをこれから作るよ！</div>,
+  },
 ]);
 
 function App() {

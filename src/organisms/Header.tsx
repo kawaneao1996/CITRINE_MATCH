@@ -16,7 +16,8 @@ export default function Header() {
                     </div>
                     <div className="flex flex-row justify-end items-center flex-grow">
                         <NavButton path="/" className={({isActive}) => generateActiveStyle({isActive})} label="Home" />
-                        <NavButton path="/questionnaire" className={({isActive}) => generateActiveStyle({isActive})} label="Questionnaire" />
+                        {/* <NavButton path="/questionnaire" className={({isActive}) => generateActiveStyle({isActive})} label="Questionnaire" /> */}
+                        <NavButton path="/chat" className={({isActive}) => generateActiveStyle({isActive})} label="chat" />
                     </div>
                 </div>
             </header>
