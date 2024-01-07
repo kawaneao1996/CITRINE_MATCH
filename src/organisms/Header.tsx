@@ -1,5 +1,4 @@
-import { NavLink } from "react-router-dom";
-import { BUTTON_THEME, BUTTON_THEME_ACTIVE, GRADATION_ANIMATE_THEME } from "../utils/theme";
+import { NavLink } from "react-router-dom"; import { BUTTON_THEME, BUTTON_THEME_ACTIVE, GRADATION_ANIMATE_THEME } from "../utils/theme"; import NavButton from "../elements/NavButton";
 
 export default function Header() {
     const generateActiveStyle = ({ isActive }: { isActive: boolean }) => {
@@ -23,8 +22,8 @@ export default function Header() {
                         <div className="text-3xl font-bold text-white p-2">Quiz App</div>
                     </div>
                     <div className="flex flex-row justify-end items-center flex-grow">
-                        <HeaderContent path="/" label="Home" />
-                        <HeaderContent path="/questionnaire" label="Questionnaire" />
+                        <NavButton path="/" className={({isActive}) => generateActiveStyle({isActive})} label="Home" />
+                        <NavButton path="/questionnaire" className={({isActive}) => generateActiveStyle({isActive})} label="Questionnaire" />
                     </div>
                 </div>
             </header>
