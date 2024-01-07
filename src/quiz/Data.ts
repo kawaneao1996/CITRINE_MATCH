@@ -37,7 +37,6 @@ export const quizItems_ver0: QuizItem[] = [
             },
             // 必要に応じて他の選択肢を追加
         ],
-        answer: null
     },
     {
         question: "あなたの好きな季節は？",
@@ -76,7 +75,6 @@ export const quizItems_ver0: QuizItem[] = [
             },
             // 必要に応じて他の選択肢を追加
         ],
-        answer: null
     },
     {
         question: "あなたの好きな季節は？",
@@ -115,6 +113,5 @@ export const quizItems_ver0: QuizItem[] = [
             },
             // 必要に応じて他の選択肢を追加
         ],
-        answer: null
     },
 ];

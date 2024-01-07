@@ -5,6 +5,7 @@ import { Answers, EvaluationCriteria } from "../quiz/Types";
 import { calculateScore } from "../utils/CalculateScore";
 import { NullCheckArray } from "../utils/NullCheckArray";
 import { useEffect, useRef } from "react";
+import Button from "../elements/Button";
 
 function QuizCardsOrganism() {
     const { register, handleSubmit, formState: { isSubmitted }, watch } = useForm<Answers>();
@@ -40,39 +41,36 @@ function QuizCardsOrganism() {
         if (calcResult) {
             // TODO console.logを削除する
             console.log(calcResult);
+            // Object.keys(calcResult).map((key) => {alert(`${key}: ${calcResult[key]}`)});
+            for (const [key, value] of Object.entries(calcResult)) {
+                alert(`${key}: ${value}`);
+            }
         } else {
             // TODO console.logを削除する
             console.log("未回答があります");
+            alert("未回答があります");
             console.log(NullCheckArray(answersArray))
             refs[NullCheckArray(answersArray)].current!.scrollIntoView({ behavior: 'smooth' }); // 未回答の選択肢までスクロール
         }
     };
     return (
         <>
-            <div className="w-[80%] h-auto mx-auto p-5 rounded-2xl  bg-white bg-opacity-20">
+            <div className="w-full h-auto mx-auto p-5 rounded-2xl  bg-white bg-opacity-20">
                 <form onSubmit={handleSubmit(onSubmit)}>
                     {
                         quizItems_ver0.map((quizItem, index) => (
-                            <div ref={refs[index]} key={index}> {/* 各選択肢に参照を設定 */}
-                                <QuizCard quizItem={quizItem} index={index} register={register} isSubmitted={isSubmitted} />
+                            <div ref={refs[index]} key={`quizItem.div.${index}`}> {/* 各選択肢に参照を設定 */}
+                                <QuizCard key={`quizItem.QuizCard.${index}`} quizItem={quizItem} index={index} register={register} isSubmitted={isSubmitted} />
                             </div>
                         ))
                     }
-                    <button type="submit"
-                        ref={submitButtonRef}
-                        className="
-                        mx-auto
-                        block
-                        p-2
-                        text-white
-                        hover:text-primary-600
-                        hover:bg-white
-                        border-2
-                        rounded-lg
-                    "
-                    >
-                        診断！
-                    </button>
+                    <div className="flex flex-col justify-center items-center">
+                        <Button
+                            type="submit"
+                            ref={submitButtonRef}
+                            label="診断！"
+                        />
+                    </div>
                 </form>
             </div>
         </>
