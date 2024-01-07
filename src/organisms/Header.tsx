@@ -1,17 +1,10 @@
-import { NavLink } from "react-router-dom"; import { BUTTON_THEME, BUTTON_THEME_ACTIVE, GRADATION_ANIMATE_THEME } from "../utils/theme"; import NavButton from "../elements/NavButton";
+import { BUTTON_THEME, BUTTON_THEME_ACTIVE, GRADATION_ANIMATE_THEME } from "../utils/theme"; import NavButton from "../elements/NavButton";
 
 export default function Header() {
     const generateActiveStyle = ({ isActive }: { isActive: boolean }) => {
         let style = isActive ? BUTTON_THEME_ACTIVE : BUTTON_THEME;
         return style;
     };
-    const HeaderContent = ({ path, label }: { path: string, label: string }) => {
-        return (
-            <NavLink to={path} className={generateActiveStyle}>
-                {label}
-            </NavLink>
-        );
-    }
 
     return (
         <>

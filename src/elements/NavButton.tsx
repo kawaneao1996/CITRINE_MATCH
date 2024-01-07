@@ -3,12 +3,12 @@ import { BUTTON_THEME } from "../utils/theme";
 
 type Props = {
     path: string;
-    className: string | (({isActive}:{isActive:boolean}) => string);
+    className?: string | (({isActive}:{isActive:boolean}) => string);
     label: string;
 };
 export default function NavButton(props: Props) {
     return (
-        <NavLink to={props.path} className={props.className || BUTTON_THEME}>
+        <NavLink to={props.path} className={props.className ?? BUTTON_THEME}>
             {props.label}
         </NavLink>
     );
