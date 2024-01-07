@@ -3,8 +3,8 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import QuestionaireTemplate from './templates/QuetionaireTemplate';
 import HomeTemplate from './templates/HomeTemplate';
+import QuestionnaireTemplate from './templates/QuestionnaireTemplate';
 
 const router = createBrowserRouter([
   {
@@ -12,8 +12,8 @@ const router = createBrowserRouter([
     element: <HomeTemplate />,
   },
   {
-    path: "/questionaire",
-    element: <QuestionaireTemplate />,
+    path: "/questionnaire",
+    element: <QuestionnaireTemplate />,
   },
 ]);
 

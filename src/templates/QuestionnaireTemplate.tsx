@@ -1,7 +1,7 @@
 import Header from "../organisms/Header";
 import QuizCardsOrganism from "../organisms/QuizCardsOrganism";
 
-function QuestionaireTemplate() {
+function QuestionnaireTemplate() {
     // TODO パンくずリストを追加する
     return (
         <>
@@ -22,4 +22,4 @@ function QuestionaireTemplate() {
     );
 }
 
-export default QuestionaireTemplate;
+export default QuestionnaireTemplate;
