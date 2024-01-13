@@ -9,6 +9,7 @@ import {
 import HomeTemplate from './templates/HomeTemplate.tsx'
 import QuestionnaireTemplate from './templates/QuestionnaireTemplate.tsx'
 import { ROUTER_BASE_URL, ROUTER_CHAT_URL, ROUTER_QUIZ_URL } from './utils/URL.ts';
+import ChatTemplate from './templates/ChatTemplate.tsx';
 
 const router = createBrowserRouter([
   {
@@ -25,9 +26,10 @@ const router = createBrowserRouter([
       },
       {
         path: ROUTER_CHAT_URL,
-        element: <div>chatをこれから作るよ！</div>,
+        element: <ChatTemplate />,
       },
     ],
+    // TODO: 404ページをErrorPage.tsxにする
     errorElement: <div>Not Found</div>,
   },
 ])
