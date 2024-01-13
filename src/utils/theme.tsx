@@ -1,5 +1,5 @@
 export const BACKGROUND_THEME = `
-bg-primary-600 min-h-screen p-3
+bg-primary-600 h-screen-minus-header p-3
 `;
 export const BUTTON_THEME = `
 m-2
@@ -29,3 +29,4 @@ via-primary-500
 to-primary-700
 background-animate
 `;
+export const HEADER_HEIGHT = '16';

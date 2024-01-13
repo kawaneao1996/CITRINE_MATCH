@@ -1,4 +1,4 @@
-import { BUTTON_THEME, BUTTON_THEME_ACTIVE, GRADATION_ANIMATE_THEME } from "../utils/theme"; import NavButton from "../elements/NavButton";
+import { BUTTON_THEME, BUTTON_THEME_ACTIVE, GRADATION_ANIMATE_THEME, HEADER_HEIGHT } from "../utils/theme"; import NavButton from "../elements/NavButton";
 import { ROUTER_BASE_URL, ROUTER_CHAT_URL } from "../utils/URL";
 
 export default function Header() {
@@ -10,7 +10,7 @@ export default function Header() {
     return (
         <>
             {/* 各ページへのリンクをヘッダーに表示する */}
-            <header className={GRADATION_ANIMATE_THEME}>
+            <header className={`${GRADATION_ANIMATE_THEME} h-header-height`}>
                 <div className="flex flex-row justify-between items-center">
                     <div className="flex flex-row items-center center">
                         <div className="text-3xl font-bold text-white p-2">Quiz App</div>
