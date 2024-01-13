@@ -7,7 +7,7 @@ function App() {
     <>
       <div className="flex flex-col">
         <Header />
-        <div className={`${BACKGROUND_THEME} flex flex-1 justify-center items-center`}>
+        <div className={`flex flex-1 justify-center items-center`}>
           <Outlet />
         </div>
       </div>
