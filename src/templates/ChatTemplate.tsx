@@ -17,9 +17,10 @@ export default function ChatTemplate() {
 
     return (
         <>
+        {/* TODO gridでここのデザインを指定する */}
             <div className={`${BACKGROUND_THEME} w-full flex flex-col`}>
                 <div className="flex-grow-1 flex-shrink-1 overflow-auto border-2 border-white rounded-xl w-full ">
-                    <ul className="w-full p-2 whitespace-pre-wrap break-all text-white">
+                    <ul className="h-auto min-h-screen w-full p-2 whitespace-pre-wrap break-all text-white">
                         <li className="flex w-full  mb-4">
                             {/* ここにアイコンを表示 */}
                             <div className="max-w-full">
