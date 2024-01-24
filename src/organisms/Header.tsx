@@ -1,4 +1,4 @@
-import { BUTTON_THEME, BUTTON_THEME_ACTIVE, GRADATION_ANIMATE_THEME, HEADER_HEIGHT } from "../utils/theme"; import NavButton from "../elements/NavButton";
+import { BUTTON_THEME, BUTTON_THEME_ACTIVE, GRADATION_ANIMATE_THEME } from "../utils/theme"; import NavButton from "../elements/NavButton";
 import { ROUTER_BASE_URL, ROUTER_CHAT_URL } from "../utils/URL";
 
 export default function Header() {
