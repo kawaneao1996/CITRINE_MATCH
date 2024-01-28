@@ -39,12 +39,7 @@ function QuizCardsOrganism() {
         })
         const calcResult: EvaluationCriteria | false = calculateScore(answersArray);
         if (calcResult) {
-            // TODO console.logを削除する
-            console.log(calcResult);
-            // Object.keys(calcResult).map((key) => {alert(`${key}: ${calcResult[key]}`)});
-            for (const [key, value] of Object.entries(calcResult)) {
-                alert(`${key}: ${value}`);
-            }
+            alert('回答を受け付けました');
         } else {
             // TODO console.logを削除する
             console.log("未回答があります");
