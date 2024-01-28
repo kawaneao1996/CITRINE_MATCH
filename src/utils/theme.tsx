@@ -1,6 +1,6 @@
-export const BACKGROUND_THEME = `
-bg-primary-600 h-screen-minus-header p-3
-`;
+export const BACKGROUND_THEME_HOME = `bg-primary-600 h-screen-minus-header p-3`;
+export const BACKGROUND_THEME_QUESTION = `bg-primary-600 `;
+export const BACKGROUND_THEME_CHAT = `bg-primary-600 h-screen-minus-header p-3`;
 export const BUTTON_THEME = `
 m-2
 p-2

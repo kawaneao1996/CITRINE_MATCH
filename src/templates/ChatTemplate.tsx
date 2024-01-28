@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BACKGROUND_THEME } from "../utils/theme";
+import { BACKGROUND_THEME_CHAT } from "../utils/theme";
 
 export default function ChatTemplate() {
     const [message, setMessage] = useState("");
@@ -24,7 +24,7 @@ export default function ChatTemplate() {
 
     return (
         <>
-            <div className={`${BACKGROUND_THEME} w-full flex flex-col`}>
+            <div className={`${BACKGROUND_THEME_CHAT} w-full flex flex-col`}>
                 <div className="flex-grow-1 flex-shrink-1 overflow-auto border-2 border-white rounded-xl w-full ">
                     <ul className="h-auto min-h-screen w-full p-2 whitespace-pre-wrap break-all text-white">
                         <li className="flex w-full  mb-4">
@@ -52,13 +52,6 @@ export default function ChatTemplate() {
                                 </div>
                             </li>
                         ))}
-                        <li className="max-w-full  mb-4">
-                            {/* ここにアイコンを表示 */}
-                            <div className="max-w-full">
-                                <div className="text-sm ">テスト</div>
-                                <div className="text-sm font-bold">{message}</div>
-                            </div>
-                        </li>
                     </ul>
                 </div>
                 {/* テキストフィールドのフォーム */}
@@ -71,13 +64,13 @@ export default function ChatTemplate() {
                             value={message}
                             onChange={handleMessageChange}
                             // placeholder="Type your message..."
-                            className="flex-grow p-2  border-2 border-white rounded-lg"
+                            className="flex-grow p-2 mr-1 border-2 border-white rounded-lg"
                         />
                         <button
                             type="submit"
                             className="flex-grow-0  px-4 py-2 bg-secondary-500 text-white rounded-lg"
                         >
-                            Send
+                            送信
                         </button>
                     </form>
                 </div>
