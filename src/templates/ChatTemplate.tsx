@@ -1,19 +1,41 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BACKGROUND_THEME_CHAT } from "../utils/theme";
+import { socket } from "../utils/socket";
 
 export default function ChatTemplate() {
     const myId = "1";
     const myName = "ユーザー１";
-    type Message = {userId: string, userName: string, message?:string};
+    type Message = { userId: string, userName: string, message?: string };
 
-    const [currentMessage, setCurrentMessage] = useState<Message>({userId: myId, userName: myName, message: ""});
+    const [currentMessage, setCurrentMessage] = useState<Message>({ userId: myId, userName: myName, message: "" });
 
     const [Messages, setMessages] = useState<Message[]>([]);
 
+    const [isConnected, setIsConnected] = useState(socket.connected)
+    useEffect((() => {
+        function onConnect() {
+            setIsConnected(true)
+        }
+        function onDisconnect() {
+            setIsConnected(false)
+        }
+        function onMessage(message: Message) {
+            setMessages([...Messages, message]);
+        }
+        socket.on("connect", onConnect)
+        socket.on("disconnect", onDisconnect)
+        socket.on("message", onMessage)
+
+        return () => {
+            socket.off("connect", onConnect)
+            socket.off("disconnect", onDisconnect)
+            socket.off("message", onMessage)
+        }
+    }), [...Messages])
 
 
-    const handleMessageChange = (e: React.ChangeEvent<HTMLInputElement>, userId:string, userName:string) => {
-        setCurrentMessage({userId: userId, userName: userName, message: e.target.value});
+    const handleMessageChange = (e: React.ChangeEvent<HTMLInputElement>, userId: string, userName: string) => {
+        setCurrentMessage({ userId: userId, userName: userName, message: e.target.value });
     };
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -23,12 +45,13 @@ export default function ChatTemplate() {
 
         setMessages([...Messages, currentMessage]);
         // メッセージ入力欄を空にする
-        setCurrentMessage({userId: myId, userName: myName, message: ""});
+        setCurrentMessage({ userId: myId, userName: myName, message: "" });
     };
 
     return (
         <>
             <div className={`${BACKGROUND_THEME_CHAT} w-full flex flex-col`}>
+                <div className="text-secondary-950">State: {'' + isConnected}</div>
                 <div className="flex-grow-1 flex-shrink-1 overflow-auto border-2 border-white rounded-xl w-full ">
                     <ul className="h-auto min-h-screen w-full p-2 whitespace-pre-wrap break-all text-white">
                         {Messages.map((message, index) => (
