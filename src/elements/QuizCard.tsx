@@ -20,7 +20,7 @@ function QuizCard(props: Props) {
     };
 
     return (
-        <div className="bg-opaity-10  border-2 rounded-xl m-5 p-5">
+        <div className="border-2 rounded-xl m-5 p-5">
             <section className="bg-opacity-0 text-white">
                 <h2>{props.index + 1}問目</h2>
                 <p>{props.quizItem.question}</p>

@@ -50,7 +50,7 @@ function QuizCardsOrganism() {
     };
     return (
         <>
-            <div className="w-full h-auto mx-auto p-5 rounded-2xl  bg-white bg-opacity-20">
+            <div className="w-full h-auto mx-auto p-5 ">
                 <form onSubmit={handleSubmit(onSubmit)}>
                     {
                         quizItems_ver0.map((quizItem, index) => (

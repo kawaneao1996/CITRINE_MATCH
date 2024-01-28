@@ -2,14 +2,17 @@ import { useState } from "react";
 import { BACKGROUND_THEME_CHAT } from "../utils/theme";
 
 export default function ChatTemplate() {
-    const [message, setMessage] = useState("");
+    const myId = "1";
+    const myName = "ユーザー１";
+    type Message = {userId: string, userName: string, message:string};
+    const [message, setMessage] = useState<Message>();
 
-    const [viewMessages, setViewMessages] = useState<string[]>([]);
+    const [viewMessages, setViewMessages] = useState<(string | undefined)[]>([]);
 
 
 
-    const handleMessageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setMessage(e.target.value);
+    const handleMessageChange = (e: React.ChangeEvent<HTMLInputElement>, userId:string, userName:string) => {
+        setMessage({userId: userId, userName: userName, message: e.target.value});
     };
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -17,9 +20,9 @@ export default function ChatTemplate() {
         // メッセージ送信の処理を実装する
         console.log("Sending message:", message);
 
-        setViewMessages([...viewMessages, message]);
+        setViewMessages([...viewMessages, message?.message]);
         // メッセージ入力欄を空にする
-        setMessage("");
+        setMessage({userId: myId, userName: myName, message: ""});
     };
 
     return (
@@ -61,8 +64,8 @@ export default function ChatTemplate() {
                     >
                         <input
                             type="text"
-                            value={message}
-                            onChange={handleMessageChange}
+                            value={message?.message}
+                            onChange={(e) => handleMessageChange(e, myId, myName)}
                             // placeholder="Type your message..."
                             className="flex-grow p-2 mr-1 border-2 border-white rounded-lg"
                         />
