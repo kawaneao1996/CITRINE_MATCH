@@ -7,54 +7,65 @@ export default function ChatTemplate() {
     const myName = "ユーザー１";
     type Message = { userId: string, userName: string, message?: string };
 
-    const [currentMessage, setCurrentMessage] = useState<Message>({ userId: myId, userName: myName, message: "" });
+    const [pendingMessage, setPendingMessage] = useState<Message>({ userId: myId, userName: myName, message: "" });
 
-    const [Messages, setMessages] = useState<Message[]>([]);
+    const [recievedMessages, setRecievedMessages] = useState<Message[]>([]);
 
     const [isConnected, setIsConnected] = useState(socket.connected)
+
     useEffect((() => {
         function onConnect() {
-            setIsConnected(true)
+            setIsConnected(true);
         }
         function onDisconnect() {
-            setIsConnected(false)
+            setIsConnected(false);
         }
+        // 複数件のメッセージ受信時の処理
+        // 初期画面表示時、再接続時に実行される
+        function onMessages(messages: Message[]) {
+            setRecievedMessages([...recievedMessages, ...messages]);
+        }
+        // 1件のメッセージ受信時の処理
         function onMessage(message: Message) {
-            setMessages([...Messages, message]);
+            setRecievedMessages([...recievedMessages, message]);
         }
-        socket.on("connect", onConnect)
-        socket.on("disconnect", onDisconnect)
-        socket.on("message", onMessage)
+
+        socket.on("connect", onConnect);
+        socket.on("disconnect", onDisconnect);
+        socket.on("messages", onMessages);
+        socket.on("message", onMessage);
 
         return () => {
-            socket.off("connect", onConnect)
-            socket.off("disconnect", onDisconnect)
-            socket.off("message", onMessage)
+            socket.off("connect", onConnect);
+            socket.off("disconnect", onDisconnect);
+            socket.off("messages", onMessages);
+            socket.off("message", onMessage);
         }
-    }), [...Messages])
+    }), [[...recievedMessages]]);
 
 
     const handleMessageChange = (e: React.ChangeEvent<HTMLInputElement>, userId: string, userName: string) => {
-        setCurrentMessage({ userId: userId, userName: userName, message: e.target.value });
+        setPendingMessage({ userId: userId, userName: userName, message: e.target.value });
     };
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         // メッセージ送信の処理を実装する
-        console.log("Sending message:", currentMessage);
-
-        setMessages([...Messages, currentMessage]);
+        if (!pendingMessage.message) {
+            return;
+        }
+        socket.emit("message", pendingMessage);
+        console.log("Sending message:", pendingMessage);
         // メッセージ入力欄を空にする
-        setCurrentMessage({ userId: myId, userName: myName, message: "" });
+        setPendingMessage({ userId: myId, userName: myName, message: "" });
     };
 
     return (
         <>
             <div className={`${BACKGROUND_THEME_CHAT} w-full flex flex-col`}>
-                <div className="text-secondary-950">State: {'' + isConnected}</div>
                 <div className="flex-grow-1 flex-shrink-1 overflow-auto border-2 border-white rounded-xl w-full ">
                     <ul className="h-auto min-h-screen w-full p-2 whitespace-pre-wrap break-all text-white">
-                        {Messages.map((message, index) => (
+                        {recievedMessages.map((message, index) => (
                             <li key={index} className="max-w-full  mb-4">
                                 {/* ここにアイコンを表示 */}
                                 <div className="max-w-full">
@@ -72,7 +83,7 @@ export default function ChatTemplate() {
                     >
                         <input
                             type="text"
-                            value={currentMessage?.message}
+                            value={pendingMessage?.message}
                             onChange={(e) => handleMessageChange(e, myId, myName)}
                             // placeholder="Type your message..."
                             className="flex-grow p-2 mr-1 border-2 border-white rounded-lg"
