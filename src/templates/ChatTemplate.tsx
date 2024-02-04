@@ -1,13 +1,23 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BACKGROUND_THEME_CHAT } from "../utils/theme";
 import { socket } from "../utils/socket";
 
 export default function ChatTemplate() {
     const myId = "1";
-    const myName = "ユーザー１";
+    // const myName = "ユーザー１";
+    const myName = useRef("ユーザー１");
+    useEffect(() => {
+        // ユーザー名の取得
+        const userName = prompt("ユーザー名を入力してください", "ユーザー１");
+        if (userName) {
+            myName.current = userName;
+        }
+    }, []);
+
     type Message = { userId: string, userName: string, message?: string };
 
-    const [pendingMessage, setPendingMessage] = useState<Message>({ userId: myId, userName: myName, message: "" });
+    // const [pendingMessage, setPendingMessage] = useState<Message>({ userId: myId, userName: myName, message: "" });
+    const [pendingMessage, setPendingMessage] = useState<Message>({ userId: myId, userName: myName.current, message: "" });
 
     const [recievedMessages, setRecievedMessages] = useState<Message[]>([]);
 
@@ -57,46 +67,53 @@ export default function ChatTemplate() {
         socket.emit("message", pendingMessage);
         console.log("Sending message:", pendingMessage);
         // メッセージ入力欄を空にする
-        setPendingMessage({ userId: myId, userName: myName, message: "" });
+        // setPendingMessage({ userId: myId, userName: myName, message: "" });
+        setPendingMessage({ userId: myId, userName: myName.current, message: "" });
     };
 
     return (
         <>
-            <div className={`${BACKGROUND_THEME_CHAT} w-full flex flex-col`}>
-                <div className="flex-grow-1 flex-shrink-1 overflow-auto border-2 border-white rounded-xl w-full ">
-                    <ul className="h-auto min-h-screen w-full p-2 whitespace-pre-wrap break-all text-white">
-                        {recievedMessages.map((message, index) => (
-                            <li key={index} className="max-w-full  mb-4">
-                                {/* ここにアイコンを表示 */}
-                                <div className="max-w-full">
-                                    <div className="text-sm ">{message.userName}</div>
-                                    <div className="text-sm font-bold">{message.message}</div>
-                                </div>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-                {/* テキストフィールドのフォーム */}
-                <div className="flex flex-grow-0 flex-shrink-0 w-full mt-1 ">
-                    <form onSubmit={handleSubmit}
-                        className="flex w-full"
-                    >
-                        <input
-                            type="text"
-                            value={pendingMessage?.message}
-                            onChange={(e) => handleMessageChange(e, myId, myName)}
-                            // placeholder="Type your message..."
-                            className="flex-grow p-2 mr-1 border-2 border-white rounded-lg"
-                        />
-                        <button
-                            type="submit"
-                            className="flex-grow-0  px-4 py-2 bg-secondary-500 text-white rounded-lg"
+            {isConnected ?
+                <div className={`${BACKGROUND_THEME_CHAT} w-full flex flex-col`}>
+                    <div className="flex-grow-1 flex-shrink-1 overflow-auto border-2 border-white rounded-xl w-full ">
+                        <ul className="h-auto min-h-screen w-full p-2 whitespace-pre-wrap break-all text-white">
+                            {recievedMessages.map((message, index) => (
+                                <li key={index} className="max-w-full  mb-4">
+                                    {/* ここにアイコンを表示 */}
+                                    <div className="max-w-full">
+                                        <div className="text-sm ">{message.userName}</div>
+                                        <div className="text-sm font-bold">{message.message}</div>
+                                    </div>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                    {/* テキストフィールドのフォーム */}
+                    <div className="flex flex-grow-0 flex-shrink-0 w-full mt-1 ">
+                        <form onSubmit={handleSubmit}
+                            className="flex w-full"
                         >
-                            送信
-                        </button>
-                    </form>
+                            <input
+                                type="text"
+                                value={pendingMessage?.message}
+                                // onChange={(e) => handleMessageChange(e, myId, myName)}
+                                onChange={(e) => handleMessageChange(e, myId, myName.current)}
+                                // placeholder="Type your message..."
+                                className="flex-grow p-2 mr-1 border-2 border-white rounded-lg"
+                            />
+                            <button
+                                type="submit"
+                                className="flex-grow-0  px-4 py-2 bg-secondary-500 text-white rounded-lg"
+                            >
+                                送信
+                            </button>
+                        </form>
+                    </div>
                 </div>
-            </div>
+                :
+                <div className={`${BACKGROUND_THEME_CHAT} w-full flex flex-col`}>
+                    <div className="text-white text-center">接続中...</div>
+                </div>}
         </>
     );
 }
