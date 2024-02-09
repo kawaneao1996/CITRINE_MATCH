@@ -19,7 +19,7 @@ export default function ChatTemplate() {
     // const [pendingMessage, setPendingMessage] = useState<Message>({ userId: myId, userName: myName, message: "" });
     const [pendingMessage, setPendingMessage] = useState<Message>({ userId: myId, userName: myName.current, message: "" });
 
-    const [recievedMessages, setRecievedMessages] = useState<Message[]>([]);
+    const [receivedMessages, setReceivedMessages] = useState<Message[]>([]);
 
     const [isConnected, setIsConnected] = useState(socket.connected)
 
@@ -33,11 +33,13 @@ export default function ChatTemplate() {
         // 複数件のメッセージ受信時の処理
         // 初期画面表示時、再接続時に実行される
         function onMessages(messages: Message[]) {
-            setRecievedMessages([...recievedMessages, ...messages]);
+            setReceivedMessages([...receivedMessages, ...messages]);
+            console.log("Received messages:", messages);
         }
         // 1件のメッセージ受信時の処理
         function onMessage(message: Message) {
-            setRecievedMessages([...recievedMessages, message]);
+            setReceivedMessages([...receivedMessages, message]);
+            console.log("Received message:", message);
         }
 
         socket.on("connect", onConnect);
@@ -51,7 +53,7 @@ export default function ChatTemplate() {
             socket.off("messages", onMessages);
             socket.off("message", onMessage);
         }
-    }), [[...recievedMessages]]);
+    }), [[...receivedMessages]]);
 
 
     const handleMessageChange = (e: React.ChangeEvent<HTMLInputElement>, userId: string, userName: string) => {
@@ -77,7 +79,7 @@ export default function ChatTemplate() {
                 <div className={`${BACKGROUND_THEME_CHAT} w-full flex flex-col`}>
                     <div className="flex-grow-1 flex-shrink-1 overflow-auto border-2 border-white rounded-xl w-full ">
                         <ul className="h-auto min-h-screen w-full p-2 whitespace-pre-wrap break-all text-white">
-                            {recievedMessages.map((message, index) => (
+                            {receivedMessages.map((message, index) => (
                                 <li key={index} className="max-w-full  mb-4">
                                     {/* ここにアイコンを表示 */}
                                     <div className="max-w-full">
