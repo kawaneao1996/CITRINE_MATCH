@@ -9,4 +9,6 @@ console.log("URL", URL);
 
 // const URL = "http://localhost:3000";
 
-export const socket = io(URL);
+export const socket = io(URL, {auth: {
+    serveroffset: 0,
+}});
