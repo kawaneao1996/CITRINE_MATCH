@@ -1,8 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 import { BACKGROUND_THEME_CHAT } from "../utils/theme";
-import { socket } from "../utils/socket";
+import { io } from "socket.io-client";
 
 export default function ChatTemplate() {
+  console.log("ChatTemplate");
+const URL = import.meta.env.PROD ? "https://empty-owl-26-m12j9rvk66cj.deno.dev" : "http://localhost:3000";
+
+console.log("URL", URL);
+console.log("import.meta.env", import.meta.env);
+const socket = io(URL, {auth: {
+    serveroffset: 0,
+}});
   const myId = "1";
   // const myName = "ユーザー１";
   const myName = useRef("ユーザー１");
@@ -27,9 +35,14 @@ export default function ChatTemplate() {
 
   const [isConnected, setIsConnected] = useState(socket.connected);
 
+
   useEffect(() => {
+    console.log( "ChatTemplate","useEffect");
     function onConnect() {
+      console.log("onConnect");
       setIsConnected(true);
+      console.log("socket.connected", socket.connected);
+      console.log("socket", socket);
     }
     function onDisconnect() {
       setIsConnected(false);
@@ -39,7 +52,6 @@ export default function ChatTemplate() {
     function onMessages(messages: Message[], serveroffset: number) {
       setReceivedMessages([...receivedMessages, ...messages]);
       console.log("Received messages:", messages);
-      // 引数のserveroffsetをsocket.authに設定する
       socket.auth = { serveroffset };
     }
     // 1件のメッセージ受信時の処理
@@ -60,7 +72,7 @@ export default function ChatTemplate() {
       socket.off("messages", onMessages);
       socket.off("message", onMessage);
     };
-  }, [[...receivedMessages]]);
+  }, []);
 
   const handleMessageChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -86,7 +98,6 @@ export default function ChatTemplate() {
     // setPendingMessage({ userId: myId, userName: myName, message: "" });
     setPendingMessage({ userId: myId, userName: myName.current, message: "" });
   };
-
   return (
     <>
       {isConnected
