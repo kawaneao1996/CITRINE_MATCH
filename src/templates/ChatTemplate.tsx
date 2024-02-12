@@ -4,13 +4,17 @@ import { io } from "socket.io-client";
 
 export default function ChatTemplate() {
   console.log("ChatTemplate");
-const URL = import.meta.env.PROD ? "https://empty-owl-26-m12j9rvk66cj.deno.dev" : "http://localhost:3000";
+  const URL = import.meta.env.PROD
+    ? "https://empty-owl-26-m12j9rvk66cj.deno.dev"
+    : "http://localhost:3000";
 
-console.log("URL", URL);
-console.log("import.meta.env", import.meta.env);
-const socket = io(URL, {auth: {
-    serveroffset: 0,
-}});
+  console.log("URL", URL);
+  console.log("import.meta.env", import.meta.env);
+  const socket = io(URL, {
+    auth: {
+      serveroffset: 0,
+    },
+  });
   const myId = "1";
   // const myName = "ユーザー１";
   const myName = useRef("ユーザー１");
@@ -35,9 +39,8 @@ const socket = io(URL, {auth: {
 
   const [isConnected, setIsConnected] = useState(socket.connected);
 
-
   useEffect(() => {
-    console.log( "ChatTemplate","useEffect");
+    console.log("ChatTemplate", "useEffect");
     function onConnect() {
       console.log("onConnect");
       setIsConnected(true);
