@@ -49,17 +49,18 @@ export default function ChatTemplate() {
     }
     function onDisconnect() {
       setIsConnected(false);
+      setReceivedMessages([]);
     }
     // 複数件のメッセージ受信時の処理
     // 初期画面表示時、再接続時に実行される
     function onMessages(messages: Message[], serveroffset: number) {
-      setReceivedMessages([...receivedMessages, ...messages]);
+      setReceivedMessages(previousMessages => [...previousMessages, ...messages]);
       console.log("Received messages:", messages);
       socket.auth = { serveroffset };
     }
     // 1件のメッセージ受信時の処理
     function onMessage(message: Message, serveroffset: number) {
-      setReceivedMessages([...receivedMessages, message]);
+      setReceivedMessages(previousMessages => [...previousMessages, message]);
       console.log("Received message:", message);
       socket.auth = { serveroffset };
     }
