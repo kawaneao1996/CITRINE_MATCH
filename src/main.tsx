@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
 import {
-  createBrowserRouter,
+  createHashRouter,
   RouterProvider,
 } from "react-router-dom";
 import HomeTemplate from './templates/HomeTemplate.tsx'
@@ -12,7 +12,7 @@ import { ROUTER_BASE_URL, ROUTER_CHAT_URL, ROUTER_QUIZ_URL } from './utils/URL.t
 import ChatTemplate from './templates/ChatTemplate.tsx';
 import ErrorPage from './pages/ErrorPage.tsx';
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path:  ROUTER_BASE_URL,
     element: <App />,
