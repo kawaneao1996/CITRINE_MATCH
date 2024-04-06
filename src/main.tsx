@@ -57,9 +57,16 @@ function AppAuth() {
   }, [])
 
   if (!session) {
-    return (<Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} />)
+    return (
+      <Auth
+        supabaseClient={supabase}
+        appearance={{ theme: ThemeSupa }}
+        providers={['google', 'twitter',]}
+      />
+    )
   }
   else {
+    console.log(session);
     return (<RouterProvider router={router} />
     )
   }
