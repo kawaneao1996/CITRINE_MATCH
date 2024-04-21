@@ -1,6 +1,6 @@
 import { BUTTON_THEME, BUTTON_THEME_ACTIVE, GRADATION_ANIMATE_THEME } from "../utils/theme"; import NavButton from "../elements/NavButton";
 import { ROUTER_BASE_URL, ROUTER_CHAT_URL } from "../utils/URL";
-import { supabase } from "../main";
+import { supabase } from "../utils/supabaseClient";
 
 export default function Header() {
     const generateActiveStyle = ({ isActive }: { isActive: boolean }) => {

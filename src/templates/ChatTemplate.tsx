@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { BACKGROUND_THEME_CHAT } from "../utils/theme";
 import { io } from "socket.io-client";
+import { AlwaysScrollToBottom } from "../elements/AlwaysScrollToBottom";
 
 export default function ChatTemplate() {
   console.log("ChatTemplate");
@@ -118,6 +119,7 @@ export default function ChatTemplate() {
                     </div>
                   </li>
                 ))}
+                <AlwaysScrollToBottom />
               </ul>
             </div>
             {/* テキストフィールドのフォーム */}
