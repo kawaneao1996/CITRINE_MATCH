@@ -13,6 +13,20 @@ rounded-lg
 font-bold
 text-lg
 `;
+export const BUTTON_THEME_LOGIN = `
+m-2
+p-2
+text-black
+hover:text-secondary-800
+hover:bg-white
+bg-secondary-100
+border-2
+rounded-lg
+font-bold
+text-lg
+border-white
+shadow-md
+`;
 export const BUTTON_THEME_ACTIVE = `
 m-2
 p-2
@@ -37,3 +51,11 @@ from-cyan-400
 to-secondary-500
 background-animate
 `;
+
+export const VALIDATION_MESSAGE = `
+text-red-600
+px-4
+h-6
+-mt-4
+`;
+    
