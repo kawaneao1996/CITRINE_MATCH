@@ -50,7 +50,7 @@ export function AppAuth(props: { router: Router }) {
                             return (
                                 <li className="me-2" role="presentation" key={tab}>
                                     <button
-                                        className={`inline-block p-4 border-b-2 text-sm rounded-t-lg ${activeTab === tab ? 'text-white border-purple-600 bg-secondary-600 bg-opacity-60' : 'text-white bg-slate-600 bg-opacity-60 border-transparent'}`}
+                                        className={`inline-block p-4 border-b-8 text-sm rounded-t-lg ${activeTab === tab ? 'text-white border-purple-600 bg-slate-600 bg-opacity-60' : 'text-white bg-secondary-600 bg-opacity-60 border-transparent'}`}
                                         onClick={() => setActiveTab(tab)}
                                         role="tab"
                                     >

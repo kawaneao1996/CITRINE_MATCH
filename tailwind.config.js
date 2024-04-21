@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+import { iconsPlugin, getIconCollections } from "@egoist/tailwindcss-icons";
 export default {
   content: [
     "./index.html",
@@ -46,5 +47,11 @@ export default {
       },
     },
   },
-  plugins: ["prettier-plugin-tailwindcss"],
+  plugins: [
+    "prettier-plugin-tailwindcss",
+    iconsPlugin({
+      collections: getIconCollections(["material-symbols"]),
+    }),
+  ],
 };
+

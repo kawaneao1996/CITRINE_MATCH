@@ -14,7 +14,8 @@ font-bold
 text-lg
 `;
 export const BUTTON_THEME_LOGIN = `
-m-2
+mt-4
+mb-4
 p-2
 text-black
 hover:text-secondary-800
@@ -54,8 +55,7 @@ background-animate
 
 export const VALIDATION_MESSAGE = `
 text-red-600
-px-4
+px-2
 h-6
--mt-4
 `;
     
