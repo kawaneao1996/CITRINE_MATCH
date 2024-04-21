@@ -16,7 +16,7 @@ export const Login = () => {
         setPasswordType(passwordType === 'password' ? 'text' : 'password');
     };
 
-    const [passwordType, setPasswordType] = useState('password');
+    const [passwordType, setPasswordType] = useState<'password'|'text'>('password');
 
 
     const eyeIcon = <EyeIcon onClick={togglePasswordType} />;
@@ -29,7 +29,7 @@ export const Login = () => {
                 required: "メールアドレスは必須です",
                 pattern: {
                     value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                    message: "invalid email address",
+                    message: "メールアドレスに間違いがあります",
                 },
             },
             inputType: 'email',
