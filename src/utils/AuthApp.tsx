@@ -5,7 +5,7 @@ import { Session } from "@supabase/supabase-js";
 import { useEffect, useState } from "react";
 import { RouterProvider } from "react-router-dom";
 import { supabase } from "./supabaseClient";
-import { AuthAppLabels } from "./AuthAppLabels";
+import { AUTH_APP_LABELS } from "./AuthAppLabels";
 
 export function AppAuth(props: { router: Router }) {
     const [session, setSession] = useState<Session | null>(null);
@@ -31,7 +31,7 @@ export function AppAuth(props: { router: Router }) {
                 appearance={{ theme: ThemeSupa }}
                 providers={[]}
                 // providers={["google", "twitter"]}
-                localization={AuthAppLabels}
+                localization={AUTH_APP_LABELS}
             />
         );
     } else {

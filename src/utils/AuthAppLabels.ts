@@ -1,4 +1,4 @@
-export const AuthAppLabels = {
+export const AUTH_APP_LABELS = {
     variables: {
         sign_in: {
             email_label: "メールアドレス",
