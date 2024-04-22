@@ -4,6 +4,7 @@ import { BUTTON_THEME_LOGIN, VALIDATION_MESSAGE } from "../../utils/theme";
 
 import { useState } from "react";
 import { EyeIcon } from "./EyeIcon";
+import { supabase } from "../../utils/supabaseClient";
 
 type TypeMap = {
     'string': string,
@@ -16,7 +17,7 @@ export const Login = () => {
         setPasswordType(passwordType === 'password' ? 'text' : 'password');
     };
 
-    const [passwordType, setPasswordType] = useState<'password'|'text'>('password');
+    const [passwordType, setPasswordType] = useState<'password' | 'text'>('password');
 
 
     const eyeIcon = <EyeIcon onClick={togglePasswordType} />;
@@ -58,8 +59,15 @@ export const Login = () => {
         formState: { errors },
     } = useForm<Inputs>();
 
-    const onSubmit: SubmitHandler<Inputs> = (data) => {
-        alert('実装中だよ：' + JSON.stringify(data));
+    const onSubmit: SubmitHandler<Inputs> = async (inputData) => {
+        const { email, password } = inputData;
+        const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+        if (error) {
+            alert(error.message);
+        } else {
+            console.log(data);
+        }
+
     };
 
     return (

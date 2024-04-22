@@ -39,8 +39,8 @@ export const SignUp = () => {
             validation: {
                 required: "パスワードは必須です",
                 minLength: {
-                    value: 4,
-                    message: "パスワードは4文字以上で入力してください",
+                    value: 6,
+                    message: "パスワードは6文字以上で入力してください",
                 },
             },
             inputType: passwordType,
@@ -56,8 +56,13 @@ export const SignUp = () => {
         formState: { errors },
     } = useForm<Inputs>();
 
-    const onSubmit: SubmitHandler<Inputs> = (data) => {
-        alert('実装中だよ：' + JSON.stringify(data));
+    const onSubmit: SubmitHandler<Inputs> = async (inputData) => {
+        console.log(JSON.stringify(inputData));
+        const { data, error } = await supabase.auth.signUp({
+            email: inputData.email,
+            password: inputData.password,
+        });
+        console.log(data, error);
     };
 
     const onAnonymouslyLogin = async () => {
