@@ -1,12 +1,12 @@
-import React, {  } from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
-import './index.css'
+import React, {  } from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App.tsx';
+import './index.css';
 import {
   createHashRouter,
 } from "react-router-dom";
-import HomeTemplate from './templates/HomeTemplate.tsx'
-import QuestionnaireTemplate from './templates/QuestionnaireTemplate.tsx'
+import HomeTemplate from './templates/HomeTemplate.tsx';
+import QuestionnaireTemplate from './templates/QuestionnaireTemplate.tsx';
 import { ROUTER_BASE_URL, ROUTER_CHAT_URL, ROUTER_QUIZ_URL } from './utils/URL.ts';
 import ChatTemplate from './templates/ChatTemplate.tsx';
 import ErrorPage from './pages/ErrorPage.tsx';
@@ -40,5 +40,5 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <AppAuth router={router} />
   </React.StrictMode>,
-)
+);
 
