@@ -2,6 +2,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { BUTTON_THEME_LOGIN, VALIDATION_MESSAGE } from "../../utils/theme";
 import { Fragment, useState } from "react";
 import { EyeIcon } from "./EyeIcon";
+import { supabase } from "../../utils/supabaseClient";
 
 type TypeMap = {
     'string': string,
@@ -13,7 +14,7 @@ export const SignUp = () => {
         setPasswordType(passwordType === 'password' ? 'text' : 'password');
     };
 
-    const [passwordType, setPasswordType] = useState<'password'|'text'>('password');
+    const [passwordType, setPasswordType] = useState<'password' | 'text'>('password');
 
 
     const eyeIcon = <EyeIcon onClick={togglePasswordType} />;
@@ -59,6 +60,11 @@ export const SignUp = () => {
         alert('実装中だよ：' + JSON.stringify(data));
     };
 
+    const onAnonymouslyLogin = async () => {
+        const { data, error } = await supabase.auth.signInAnonymously();
+        console.log(data, error);
+    };
+
     return (
         <>
             <h1 className="text-xl text-secondary-950">サインアップ（新規登録）</h1>
@@ -98,7 +104,7 @@ export const SignUp = () => {
             </div>
 
             <div className="flex flex-col justify-center">
-                <button className={`${BUTTON_THEME_LOGIN}`} onClick={() => { alert('実装中だよ'); }}>アカウントを作成せずに試す</button>
+                <button type="button" className={`${BUTTON_THEME_LOGIN}`} onClick={onAnonymouslyLogin}>アカウントを作成せずに試す</button>
             </div>
         </>
     );
